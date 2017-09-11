@@ -4,5 +4,7 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="ZenBGColor">#E87C6C</color>
+    <color name="ZenBGColorOpaco">#F1B0A7</color>
+
 <!--    <color name="ZenBGColorOpaca">#E87C6C</color> -->
 </resources>
