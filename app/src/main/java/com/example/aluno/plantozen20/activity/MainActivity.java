@@ -1,4 +1,4 @@
-package com.example.aluno.plantozen20;
+package com.example.aluno.plantozen20.activity;
 
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -18,6 +18,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.TextView;
+
+import com.example.aluno.plantozen20.R;
 
 public class MainActivity extends AppCompatActivity {
 
