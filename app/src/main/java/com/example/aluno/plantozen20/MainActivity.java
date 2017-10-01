@@ -19,6 +19,9 @@ import android.view.ViewGroup;
 
 import android.widget.TextView;
 
+import java.util.Iterator;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
 
     /**
@@ -63,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });*/
 
-            //TESTE COMENTÁRIO NA BRANCH
+        // TODO: deletar e popular o BD. acho que aqui é um lugar bom
     }
 
 
@@ -119,7 +122,37 @@ public class MainActivity extends AppCompatActivity {
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
             TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-            textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
+
+
+
+            String str_do_textView = "aqui eu crio um novo texto na RAM <abc da RAM> e mostro;\n";
+            str_do_textView += " daí mudo pra <abc do BD> e salvo no BD; daí mudo o texto da RAM, daí carrego o PRIMEIRO do BD pra RAM e mostro.\n\n\n";
+            str_do_textView += getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)) + "\n\n\n";
+
+
+            Tag tg = new Tag("<abc da RAM>", "simbolo", 0x000000);
+
+            str_do_textView += tg.nome + "\n";
+
+            tg.nome = "<abc do BD>";
+
+            tg.save();
+            tg.nome = "<abc DESCARTADO>";
+            tg = Tag.findById(Tag.class, 1L); // 1L é 1 em long int 64 bits :|
+            str_do_textView += tg.nome + "\n\n\n\n";
+
+            str_do_textView += "agora eu vou carregar todos que tem no BD e mostrar na ordem:\n\n";
+            Iterator<Tag> tags = Tag.findAll(Tag.class);
+            while(tags.hasNext()) {
+                tg = tags.next();
+                str_do_textView += tg.nome + "\n";
+            }
+
+
+
+
+
+            textView.setText(str_do_textView);
             return rootView;
         }
     }
@@ -161,3 +194,8 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 }
+
+
+
+
+
