@@ -1,8 +1,13 @@
 package com.example.aluno.plantozen20;
 
+import android.app.Dialog;
+import android.app.FragmentTransaction;
+import android.content.Context;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.DialogFragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -17,6 +22,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
@@ -62,6 +68,18 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });*/
+
+        ImageButton novaAnotacao = (ImageButton) findViewById(R.id.menu_item2);
+        novaAnotacao.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                newAnotation alertDialog = new newAnotation();
+
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.addToBackStack(null);
+
+                alertDialog.show(getSupportFragmentManager(),"Dialog");
+            }
+        });
     }
 
 
@@ -158,4 +176,7 @@ public class MainActivity extends AppCompatActivity {
             return null;
         }
     }
+
 }
+
+
