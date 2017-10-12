@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
             tab.setCustomView(mSectionsPagerAdapter.getItem(i).getView());
         }
 
-        //TESTE COMENTÁRIO NA BRANCH
+            //TESTE COMENTÁRIO NA BRANCH
 
     }
 
@@ -128,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
             TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-            //   textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
+         //   textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
             return rootView;
         }
     }
@@ -149,12 +149,12 @@ public class MainActivity extends AppCompatActivity {
             this.context = context;
         }
 
-        //  @Override
-        //   public Fragment getItem(int position) {
-        // getItem is called to instantiate the fragment for the given page.
-        // Return a PlaceholderFragment (defined as a static inner class below).
-        //  return PlaceholderFragment.newInstance(position + 1);
-        //  }
+      //  @Override
+     //   public Fragment getItem(int position) {
+            // getItem is called to instantiate the fragment for the given page.
+            // Return a PlaceholderFragment (defined as a static inner class below).
+          //  return PlaceholderFragment.newInstance(position + 1);
+      //  }
 
         @Override
         public int getCount() {
