@@ -16,11 +16,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-
-import com.example.aluno.plantozen20.model.BlankFragment;
-
+import com.example.aluno.plantozen20.model.Anotacoes;
+import com.example.aluno.plantozen20.model.Atividades;
+import com.example.aluno.plantozen20.model.AtividadesTMI;
 
 
 import android.widget.TextView;
@@ -168,11 +166,11 @@ public class MainActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    return new BlankFragment();
+                    return new AtividadesTMI();
                 case 1:
-                    return new BlankFragment();
+                    return new Atividades();
                 case 2:
-                    return new BlankFragment();
+                    return new Anotacoes();
             }
             return null;
         }

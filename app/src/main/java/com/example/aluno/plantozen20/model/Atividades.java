@@ -14,9 +14,9 @@ import com.example.aluno.plantozen20.adapter.MyAdapter;
 /**
  * Created by Aluno on 02/10/2017.
  */
-public class BlankFragment extends Fragment {
+public class Atividades extends Fragment {
 
-    public BlankFragment() {
+    public Atividades() {
         // Required empty public constructor
     }
 
@@ -34,8 +34,9 @@ public class BlankFragment extends Fragment {
 
         RecyclerView rv = (RecyclerView) rootView.findViewById(R.id.rv_recycler_view);
         rv.setHasFixedSize(true);
-         MyAdapter adapter = new MyAdapter(new String[]{"test one", "test two", "test three", "test four", "test five" , "test six" , "test seven"});
-         rv.setAdapter(adapter);
+        MyAdapter adapter = new MyAdapter(new String[]{"Banho no dog", "Limpar cozinha", "Correr", "Ir ao banco", "Ir ao Supermercado", "Estudar"},
+                new String[]{"12/10/2017", "12/10/2017", "12/10/2017", "15/10/2017", "15/10/2017", "17/10/2017"});
+        rv.setAdapter(adapter);
 
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         rv.setLayoutManager(llm);
