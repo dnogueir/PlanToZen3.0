@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.util.Log;
 
 
 import com.example.aluno.plantozen20.R;
@@ -59,8 +60,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         holder.mCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               // String currentValue = mDataset[position];
-               // Log.d("CardView", "CardView Clicked: " + currentValue);
+                String currentValue = mDataset[position];
+                Log.d("CardView", "CardView Clicked: " + currentValue);
             }
         });
     }
