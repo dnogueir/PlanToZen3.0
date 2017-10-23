@@ -1,8 +1,7 @@
-package com.example.aluno.plantozen20;
+package com.example.aluno.plantozen20.activity;
 
+import android.content.Context;
 import android.support.design.widget.TabLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -16,11 +15,26 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.app.FragmentTransaction;
+import android.support.v4.app.DialogFragment;
+import android.support.v7.app.AlertDialog;
+import android.app.Dialog;
+
+
+import com.example.aluno.plantozen20.model.Anotacoes;
+import com.example.aluno.plantozen20.model.Atividades;
+import com.example.aluno.plantozen20.model.AtividadesTMI;
+import com.example.aluno.plantozen20.adapter.newAnotation;
+import com.example.aluno.plantozen20.adapter.newActivity;
+
 
 import android.widget.TextView;
 
 import java.util.Iterator;
 import java.util.List;
+import com.example.aluno.plantozen20.R;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -48,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(), MainActivity.this);
 
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
@@ -57,16 +71,47 @@ public class MainActivity extends AppCompatActivity {
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
 
-        /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.menu);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
+        //Image Button nova anotação
+        ImageButton novaAnotacao = (ImageButton) findViewById(R.id.menu_item2);
+        novaAnotacao.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                newAnotation alertDialog = new newAnotation();
+
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.addToBackStack(null);
+
+                alertDialog.show(getSupportFragmentManager(),"Dialog");
             }
-        });*/
+        });
+
+        //Image Button nova atividade
+        ImageButton novaAtividade = (ImageButton) findViewById(R.id.menu_item);
+        novaAtividade.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                newActivity alertDialog = new newActivity();
+
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.addToBackStack(null);
+
+                alertDialog.show(getSupportFragmentManager(),"Dialog");
+            }
+        });
+
+        // Iterate over all tabs and set the custom view
+        for (int i = 0; i < tabLayout.getTabCount(); i++) {
+            TabLayout.Tab tab = tabLayout.getTabAt(i);
+            tab.setCustomView(mSectionsPagerAdapter.getItem(i).getView());
+        }
+
+
 
         // TODO: deletar e popular o BD. acho que aqui é um lugar bom
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
     }
 
 
@@ -153,6 +198,7 @@ public class MainActivity extends AppCompatActivity {
 
 
             textView.setText(str_do_textView);
+         //   textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
             return rootView;
         }
     }
@@ -161,17 +207,16 @@ public class MainActivity extends AppCompatActivity {
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
      * one of the sections/tabs/pages.
      */
+
+
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
-        public SectionsPagerAdapter(FragmentManager fm) {
-            super(fm);
-        }
+        String tabTitles[] = new String[] { "TMI's", "Tarefas", "Anotações" };
+        Context context;
 
-        @Override
-        public Fragment getItem(int position) {
-            // getItem is called to instantiate the fragment for the given page.
-            // Return a PlaceholderFragment (defined as a static inner class below).
-            return PlaceholderFragment.newInstance(position + 1);
+        public SectionsPagerAdapter(FragmentManager fm, Context context) {
+            super(fm);
+            this.context = context;
         }
 
         @Override
@@ -181,16 +226,22 @@ public class MainActivity extends AppCompatActivity {
         }
 
         @Override
-        public CharSequence getPageTitle(int position) {
+        public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    return "TMI's";
+                    return new AtividadesTMI();
                 case 1:
-                    return "Tarefas";
+                    return new Atividades();
                 case 2:
-                    return "Anotações";
+                    return new Anotacoes();
             }
             return null;
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            // Generate title based on item position
+            return tabTitles[position];
         }
     }
 }
