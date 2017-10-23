@@ -15,10 +15,18 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.app.FragmentTransaction;
+import android.support.v4.app.DialogFragment;
+import android.support.v7.app.AlertDialog;
+import android.app.Dialog;
+
 
 import com.example.aluno.plantozen20.model.Anotacoes;
 import com.example.aluno.plantozen20.model.Atividades;
 import com.example.aluno.plantozen20.model.AtividadesTMI;
+import com.example.aluno.plantozen20.adapter.newAnotation;
+import com.example.aluno.plantozen20.adapter.newActivity;
 
 
 import android.widget.TextView;
@@ -60,13 +68,39 @@ public class MainActivity extends AppCompatActivity {
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
 
+        //Image Button nova anotação
+        ImageButton novaAnotacao = (ImageButton) findViewById(R.id.menu_item2);
+        novaAnotacao.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                newAnotation alertDialog = new newAnotation();
+
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.addToBackStack(null);
+
+                alertDialog.show(getSupportFragmentManager(),"Dialog");
+            }
+        });
+
+        //Image Button nova atividade
+        ImageButton novaAtividade = (ImageButton) findViewById(R.id.menu_item);
+        novaAtividade.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                newActivity alertDialog = new newActivity();
+
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.addToBackStack(null);
+
+                alertDialog.show(getSupportFragmentManager(),"Dialog");
+            }
+        });
+
         // Iterate over all tabs and set the custom view
         for (int i = 0; i < tabLayout.getTabCount(); i++) {
             TabLayout.Tab tab = tabLayout.getTabAt(i);
             tab.setCustomView(mSectionsPagerAdapter.getItem(i).getView());
         }
 
-            //TESTE COMENTÁRIO NA BRANCH
+
 
     }
 
@@ -148,13 +182,6 @@ public class MainActivity extends AppCompatActivity {
             super(fm);
             this.context = context;
         }
-
-      //  @Override
-     //   public Fragment getItem(int position) {
-            // getItem is called to instantiate the fragment for the given page.
-            // Return a PlaceholderFragment (defined as a static inner class below).
-          //  return PlaceholderFragment.newInstance(position + 1);
-      //  }
 
         @Override
         public int getCount() {
