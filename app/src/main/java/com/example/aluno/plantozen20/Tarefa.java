@@ -5,12 +5,10 @@ import com.orm.SugarRecord;
 import java.util.List;
 
 
-enum Status {PENDENTE, FINALZIADA, ESCONDIDA}
-
-public class Tarefa extends SugarRecord<Tarefa> {
+public class Tarefa extends SugarRecord {
     List<Anexo> anexos;
     List<Dependencia> dependencias;
-    Status status;
+    TarefaStatus status;
 
     public Tarefa() {}
 

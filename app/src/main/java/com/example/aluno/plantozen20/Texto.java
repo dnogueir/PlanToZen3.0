@@ -2,17 +2,13 @@ package com.example.aluno.plantozen20;
 
 import com.orm.SugarRecord;
 
-enum TipoTexto {
-    TITULO, DESCRICAO
-}
+public class Texto extends SugarRecord {
 
-public class Texto extends SugarRecord<Texto> implements Anexo {
-
-    TipoTexto tipo;
-    String conteudo;
+    public TextoTipo tipo;
+    public String conteudo;
 
     public Texto () {}
-    public Texto (TipoTexto tipo, String conteudo) {
+    public Texto (TextoTipo tipo, String conteudo) {
         this.tipo = tipo;
         this.conteudo = conteudo;
     }

@@ -10,6 +10,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,6 +23,11 @@ import android.support.v7.app.AlertDialog;
 import android.app.Dialog;
 
 
+import com.example.aluno.plantozen20.Anexo;
+import com.example.aluno.plantozen20.Nota;
+import com.example.aluno.plantozen20.Tag;
+import com.example.aluno.plantozen20.Texto;
+import com.example.aluno.plantozen20.TextoTipo;
 import com.example.aluno.plantozen20.model.Anotacoes;
 import com.example.aluno.plantozen20.model.Atividades;
 import com.example.aluno.plantozen20.model.AtividadesTMI;
@@ -34,6 +40,9 @@ import android.widget.TextView;
 import java.util.Iterator;
 import java.util.List;
 import com.example.aluno.plantozen20.R;
+import com.orm.SchemaGenerator;
+import com.orm.SugarContext;
+import com.orm.SugarDb;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -106,6 +115,27 @@ public class MainActivity extends AppCompatActivity {
 
 
         // TODO: deletar e popular o BD. acho que aqui é um lugar bom
+
+        // finaliza, reseta e reinicia o BD
+        /* // descomente para resetar e popular o BD a cada inicialização
+        Log.i("COMECOU A RESETAR O BD", "~~~~~~~~~~~~~~");
+        SugarContext.terminate();
+        SchemaGenerator schemaGenerator = new SchemaGenerator(getApplicationContext());
+        schemaGenerator.deleteTables(new SugarDb(getApplicationContext()).getDB());
+        SugarContext.init(getApplicationContext());
+        schemaGenerator.createDatabase(new SugarDb(getApplicationContext()).getDB());
+        Log.i("TERMINOU A RESETAR O BD", "~~~~~~~~~~~~~~");
+        // popula o BD
+        Log.i("COMECOU A POPULAR O BD", "~~~~~~~~~~~~~~");
+        Nota nota = new Nota();
+        nota.save();
+        nota.addTituloDescr("Nota A", "Descricao A");
+        //
+        nota = new Nota();
+        nota.save();
+        nota.addTituloDescr("Nota B", "Descricao B");
+        Log.i("TERMINOU A POPULAR O BD", "~~~~~~~~~~~~~~");
+        */
 
     }
 

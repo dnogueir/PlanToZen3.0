@@ -8,7 +8,7 @@ enum TipoDependencia {
     E, OU
 }
 
-public class Dependencia extends SugarRecord<Dependencia> {
+public class Dependencia extends SugarRecord {
 
     TipoDependencia tipo;
     List<Tarefa> tarefas;
