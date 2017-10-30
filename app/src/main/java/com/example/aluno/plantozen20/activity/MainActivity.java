@@ -117,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
         // TODO: deletar e popular o BD. acho que aqui é um lugar bom
 
         // finaliza, reseta e reinicia o BD
-        /* // descomente para resetar e popular o BD a cada inicialização
+         // descomente para resetar e popular o BD a cada inicialização
         Log.i("COMECOU A RESETAR O BD", "~~~~~~~~~~~~~~");
         SugarContext.terminate();
         SchemaGenerator schemaGenerator = new SchemaGenerator(getApplicationContext());
@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
         SugarContext.init(getApplicationContext());
         schemaGenerator.createDatabase(new SugarDb(getApplicationContext()).getDB());
         Log.i("TERMINOU A RESETAR O BD", "~~~~~~~~~~~~~~");
-        // popula o BD
+       // popula o BD
         Log.i("COMECOU A POPULAR O BD", "~~~~~~~~~~~~~~");
         Nota nota = new Nota();
         nota.save();
@@ -135,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
         nota.save();
         nota.addTituloDescr("Nota B", "Descricao B");
         Log.i("TERMINOU A POPULAR O BD", "~~~~~~~~~~~~~~");
-        */
+
 
     }
 
@@ -199,7 +199,7 @@ public class MainActivity extends AppCompatActivity {
             TextView textView = (TextView) rootView.findViewById(R.id.section_label);
 
 
-
+/*
             String str_do_textView = "aqui eu crio um novo texto na RAM <abc da RAM> e mostro;\n";
             str_do_textView += " daí mudo pra <abc do BD> e salvo no BD; daí mudo o texto da RAM, daí carrego o PRIMEIRO do BD pra RAM e mostro.\n\n\n";
             str_do_textView += getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)) + "\n\n\n";
@@ -227,7 +227,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-            textView.setText(str_do_textView);
+            textView.setText(str_do_textView);*/
          //   textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
             return rootView;
         }
