@@ -4,6 +4,7 @@ package com.example.aluno.plantozen20.adapter;
  * Created by Aluno on 02/10/2017.
  */
 
+import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,13 +12,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.util.Log;
+import android.content.Context;
+
+
+
+import android.content.Intent;
 
 
 import com.example.aluno.plantozen20.R;
+import com.example.aluno.plantozen20.activity.TaskActivity;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     private String[] mDataset;
     private String[] mDataset2;
+    private Intent intent = null;
+
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -26,8 +35,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         public CardView mCardView;
         public TextView mTextView;
         public TextView mTextView2;
+        private final Context context;
+
         public MyViewHolder(View v) {
             super(v);
+            context = v.getContext();
 
             mCardView = (CardView) v.findViewById(R.id.card_view);
             mTextView = (TextView) v.findViewById(R.id.tv_text);
@@ -45,6 +57,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     @Override
     public MyAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent,
                                                      int viewType) {
+
+
         // create a new view
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.card_item, parent, false);
@@ -57,10 +71,17 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         holder.mTextView.setText(mDataset[position]);
         holder.mTextView2.setText(mDataset2[position]);
+        final Context context = holder.context;
         holder.mCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 String currentValue = mDataset[position];
+                intent =  new Intent(context, TaskActivity.class);
+                Bundle b = new Bundle();
+                b.putInt("key", 1); //Your id
+                intent.putExtras(b); //Put your id to your next Intent
+                context.startActivity(intent);
                 Log.d("CardView", "CardView Clicked: " + currentValue);
             }
         });
