@@ -79,7 +79,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
                 String currentValue = mDataset[position];
                 intent =  new Intent(context, TaskActivity.class);
                 Bundle b = new Bundle();
-                b.putInt("key", 1); //Your id
+
+                b.putString("titulo", currentValue);
+               // b.putInt("key", 1); //Your id
                 intent.putExtras(b); //Put your id to your next Intent
                 context.startActivity(intent);
                 Log.d("CardView", "CardView Clicked: " + currentValue);

@@ -55,7 +55,7 @@ public class TaskActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_task);
+        setContentView(R.layout.anotacao);
 
        // Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
        // setSupportActionBar(toolbar);
@@ -65,9 +65,13 @@ public class TaskActivity extends AppCompatActivity {
 
         // Set up the ViewPager with the sections adapter.
        // mViewPager = (ViewPager) findViewById(R.id.container);
+        TextView texto = (TextView)findViewById(R.id.editText_nomenota);
+
         Bundle b = getIntent().getExtras();
-        int value = b.getInt("key");
-        System.out.println(value);
+       // int value = b.getInt("key");
+        String titulo = b.getString("titulo");
+      //  System.out.println(value);
+        texto.setText(titulo);
         //Log.d(""+value);
 
 
