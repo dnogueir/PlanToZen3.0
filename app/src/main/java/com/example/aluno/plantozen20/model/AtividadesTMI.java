@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.aluno.plantozen20.R;
-import com.example.aluno.plantozen20.adapter.MyAdapter;
+import com.example.aluno.plantozen20.adapter.taskAdapter;
 
 /**
  * Created by Aluno on 02/10/2017.
@@ -34,7 +34,7 @@ public class AtividadesTMI extends Fragment {
 
         RecyclerView rv = (RecyclerView) rootView.findViewById(R.id.rv_recycler_view);
         rv.setHasFixedSize(true);
-        MyAdapter adapter = new MyAdapter(new String[]{"Banho no dog", "Limpar cozinha", "Correr"},
+        taskAdapter adapter = new taskAdapter(new String[]{"Banho no dog", "Limpar cozinha", "Correr"},
                 new String[]{"12/10/2017", "12/10/2017", "12/10/2017"});
         rv.setAdapter(adapter);
 
