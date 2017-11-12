@@ -4,21 +4,13 @@ import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.content.DialogInterface;
 import android.widget.EditText;
 
 
-import com.example.aluno.plantozen20.Anexo;
-import com.example.aluno.plantozen20.AnexoTipo;
-import com.example.aluno.plantozen20.Nota;
+import com.example.aluno.plantozen20.model_classes.Nota;
 import com.example.aluno.plantozen20.R;
-import com.example.aluno.plantozen20.Texto;
-import com.example.aluno.plantozen20.TextoTipo;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by tamir on 01/10/2017.

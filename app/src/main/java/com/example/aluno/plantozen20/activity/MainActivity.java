@@ -18,16 +18,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.app.FragmentTransaction;
-import android.support.v4.app.DialogFragment;
-import android.support.v7.app.AlertDialog;
-import android.app.Dialog;
 
 
-import com.example.aluno.plantozen20.Anexo;
-import com.example.aluno.plantozen20.Nota;
-import com.example.aluno.plantozen20.Tag;
-import com.example.aluno.plantozen20.Texto;
-import com.example.aluno.plantozen20.TextoTipo;
+import com.example.aluno.plantozen20.model_classes.Anexo;
+import com.example.aluno.plantozen20.model_classes.Nota;
+import com.example.aluno.plantozen20.model_classes.Tag;
+import com.example.aluno.plantozen20.model_classes.Tarefa;
 import com.example.aluno.plantozen20.model.Anotacoes;
 import com.example.aluno.plantozen20.model.Atividades;
 import com.example.aluno.plantozen20.model.AtividadesTMI;
@@ -37,8 +33,6 @@ import com.example.aluno.plantozen20.adapter.newActivity;
 
 import android.widget.TextView;
 
-import java.util.Iterator;
-import java.util.List;
 import com.example.aluno.plantozen20.R;
 import com.orm.SchemaGenerator;
 import com.orm.SugarContext;
@@ -127,13 +121,32 @@ public class MainActivity extends AppCompatActivity {
         Log.i("TERMINOU A RESETAR O BD", "~~~~~~~~~~~~~~");
        // popula o BD
         Log.i("COMECOU A POPULAR O BD", "~~~~~~~~~~~~~~");
+        // cria a tag TMI
+        Tag tmi = new Tag("TMI", "", 0);
+        tmi.save();
+        // cria duas tarefas com a TAG TMI
+        Tarefa ta = new Tarefa();
+        ta.save();
+        ta.addTituloDescr("Tarefa A", "Descr Tarefa A (TMI)");
+        ta.addAnexo(new Anexo(tmi));
+        //
+        Tarefa tb = new Tarefa();
+        tb.save();
+        tb.addTituloDescr("Tarefa B", "Descr Tarefa B (TMI)");
+        tb.addAnexo(new Anexo(tmi));
+        // cria uma tarefa sem a TAG TMI
+        Tarefa tc = new Tarefa();
+        tc.save();
+        tc.addTituloDescr("Tarefa C", "Descr Tarefa C");
+        // Cria duas notas
         Nota nota = new Nota();
         nota.save();
-        nota.addTituloDescr("Nota A", "Descricao A");
+        nota.addTituloDescr("Nota A", "Descr Nota A");
         //
         nota = new Nota();
         nota.save();
-        nota.addTituloDescr("Nota B", "Descricao B");
+        nota.addTituloDescr("Nota B", "Descr Nota B");
+        //
         Log.i("TERMINOU A POPULAR O BD", "~~~~~~~~~~~~~~");
 
 

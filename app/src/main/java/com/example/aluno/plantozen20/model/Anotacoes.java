@@ -9,11 +9,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.aluno.plantozen20.Anexo;
-import com.example.aluno.plantozen20.AnexoTipo;
-import com.example.aluno.plantozen20.Nota;
+import com.example.aluno.plantozen20.model_classes.Anexo;
+import com.example.aluno.plantozen20.model_classes.AnexoTipo;
+import com.example.aluno.plantozen20.model_classes.Nota;
 import com.example.aluno.plantozen20.R;
-import com.example.aluno.plantozen20.TextoTipo;
+import com.example.aluno.plantozen20.model_classes.TextoTipo;
 import com.example.aluno.plantozen20.adapter.MyAdapter;
 import com.google.gson.Gson;
 
