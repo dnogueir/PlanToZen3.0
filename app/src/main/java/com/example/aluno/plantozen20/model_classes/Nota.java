@@ -1,10 +1,14 @@
 package com.example.aluno.plantozen20.model_classes;
 
-        import android.util.Log;
+import android.util.Log;
+import android.util.Pair;
 
-        import com.orm.SugarRecord;
+import com.google.gson.Gson;
+import com.orm.SugarRecord;
 
-        import java.util.List;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class Nota extends SugarRecord {
 
@@ -44,6 +48,38 @@ public class Nota extends SugarRecord {
     public List<Anexo> getAnexos(String id) {
         return Anexo.find(Anexo.class, "pai = ? and pai_tipo = ?", id, String.valueOf(thisTipo));
     }
+
+    public Pair<List<Anexo>, Pair<String, String>> getHeader () {
+        return getHeader(String.valueOf(this.getId()));
+    }
+    public Pair<List<Anexo>, Pair<String, String>> getHeader (String id) {
+        List<Anexo> anexos = getAnexos(id);
+        List<Anexo> outros = new ArrayList<Anexo>();
+        String titulo = null;
+        String descr = null;
+        if (anexos != null) {
+            for (Anexo anexo: anexos) {
+                if (anexo.tipo == Anexo.Tipo.TEXTO && anexo.innTexto.tipo == Texto.Tipo.TITULO) {
+                    titulo = anexo.innTexto.conteudo;
+                } else if (anexo.tipo == Anexo.Tipo.TEXTO && anexo.innTexto.tipo == Texto.Tipo.DESCRICAO) {
+                    descr = anexo.innTexto.conteudo;
+                } else {
+                    outros.add(anexo);
+                }
+            }
+        }
+        return Pair.create(outros, Pair.create(titulo, descr));
+    }
+    public boolean anyTagEq(List<Anexo> anexos, String tag) {
+        for (Anexo anexo: anexos) {
+            Log.i("Anexo::", String.valueOf(new Gson().toJson(anexo)));
+            if (anexo.tipo == Anexo.Tipo.TAG && anexo.innTag.nome.equals(tag)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
 }
 

@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,52 +40,30 @@ public class AtividadesTMI extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+
         // Pega as informações do BD, e acaba montando uma array de strings
         Log.i("Antes de tudo!", "Antes de todo ~~~~~~~~~~");
-        List<String> strings1 = new ArrayList<String>();
-        List<String> strings2 = new ArrayList<String>();
+        List<String> titulos = new ArrayList<String>();
+        List<String> descrs = new ArrayList<String>();
         List<Tarefa> tarefas = Tarefa.listAll(Tarefa.class);
-        Gson gson = new Gson(); // debug
         if (tarefas != null) {
             for (Tarefa tarefa: tarefas) {
-                //if (tarefa instanceof Nota) continue;
-                Log.i("Nova tarefa!", "~~~~~~~~~~~~~~~~");
-                // procura por um anexo de texto de título e descrição
-                String titulo = null;
-                String descr = null;
-                Tag tag = null;
-                List<Anexo> anexos = tarefa.getAnexos();
-                Log.i("Anexos:", gson.toJson(anexos));
-                if (anexos != null) {
-                    for (Anexo anexo: anexos) {
-                        Log.i("Anexo:", gson.toJson(anexo));
-                        if (anexo.tipo == Anexo.Tipo.TEXTO && anexo.innTexto.tipo == Texto.Tipo.TITULO) {
-                            titulo = anexo.innTexto.conteudo;
-                        } else if (anexo.tipo == Anexo.Tipo.TEXTO && anexo.innTexto.tipo == Texto.Tipo.DESCRICAO) {
-                            descr = anexo.innTexto.conteudo;
-                        } else if (anexo.tipo == Anexo.Tipo.TAG) {
-                            tag = anexo.innTag;
-                        }
-                    }
-                    // filtra tarefa que não seja TMI
-                    if (tag == null || !tag.nome.equals("TMI")) {
-                        continue;
-                    }
+                Pair<List<Anexo>, Pair<String, String>> header = tarefa.getHeader();
+                Log.i("Outros anexos:", String.valueOf(new Gson().toJson(header.first)));
+                if (tarefa.anyTagEq(header.first, "TMI")) {
+                    titulos.add(header.second.first);
+                    descrs.add(header.second.second);
                 }
-                strings1.add(titulo);
-                strings2.add(descr);
-                Log.i("Titulo: <" + titulo, ">; Descr: <" + descr + ">");
             }
         }
-        String[] strings1_arr = strings1.toArray(new String[strings1.size()]);
-        String[] strings2_arr = strings2.toArray(new String[strings2.size()]);
+
 
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_blank, container, false);
 
         RecyclerView rv = (RecyclerView) rootView.findViewById(R.id.rv_recycler_view);
         rv.setHasFixedSize(true);
-        taskAdapter adapter = new taskAdapter(strings1_arr, strings2_arr);
+        taskAdapter adapter = new taskAdapter(titulos.toArray(new String[titulos.size()]), descrs.toArray(new String[descrs.size()]));
         rv.setAdapter(adapter);
 
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());

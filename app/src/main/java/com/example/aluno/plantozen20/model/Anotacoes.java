@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,38 +44,20 @@ public class Anotacoes extends Fragment {
         List<String> strings1 = new ArrayList<String>();
         List<String> strings2 = new ArrayList<String>();
         List<Nota> notas = Nota.listAll(Nota.class);
-        Gson gson = new Gson(); // debug
         if (notas != null) {
             for (Nota nota: notas) {
-                Log.i("Nova nota!", "~~~~~~~~~~~~~~~~");
-                // procura por um anexo de texto de título e descrição
-                String titulo = null;
-                String descr = null;
-                List<Anexo> anexos = nota.getAnexos();
-                if (anexos != null) {
-                    for (Anexo anexo: anexos) {
-                        Log.i("Anexo:", gson.toJson(anexo));
-                        if (anexo.tipo == Anexo.Tipo.TEXTO && anexo.innTexto.tipo == Texto.Tipo.TITULO) {
-                            titulo = anexo.innTexto.conteudo;
-                        } else if (anexo.tipo == Anexo.Tipo.TEXTO && anexo.innTexto.tipo == Texto.Tipo.DESCRICAO) {
-                            descr = anexo.innTexto.conteudo;
-                        }
-                    }
-                }
-                strings1.add(titulo);
-                strings2.add(descr);
-                Log.i("Titulo: <" + titulo, ">; Descr: <" + descr + ">");
+                Pair<List<Anexo>, Pair<String, String>> header = nota.getHeader();
+                strings1.add(header.second.first);
+                strings2.add(header.second.second);
             }
         }
-        String[] strings1_arr = strings1.toArray(new String[strings1.size()]);
-        String[] strings2_arr = strings2.toArray(new String[strings2.size()]);
 
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_blank, container, false);
 
         RecyclerView rv = (RecyclerView) rootView.findViewById(R.id.rv_recycler_view);
         rv.setHasFixedSize(true);
-        MyAdapter adapter = new MyAdapter(strings1_arr, strings2_arr);
+        MyAdapter adapter = new MyAdapter(strings1.toArray(new String[strings1.size()]), strings2.toArray(new String[strings2.size()]));
         //MyAdapter adapter = new MyAdapter(new String[]{"Anotacão 1", "Anotacão 2", "Anotacão 3", "Anotacão 4"},
         //        new String[]{"06/10/2017", "04/10/2017", "01/10/2017", "27/09/2017"});
         rv.setAdapter(adapter);
