@@ -1,28 +1,45 @@
 package com.example.aluno.plantozen20.adapter;
 
-/**
- * Created by Aluno on 02/10/2017.
- */
-
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.util.Log;
-import android.content.Context;
-
-
-
-import android.content.Intent;
-
 
 import com.example.aluno.plantozen20.R;
-import com.example.aluno.plantozen20.activity.NoteActivity;
+import com.example.aluno.plantozen20.activity.TaskActivity;
 
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
+/**
+ * Created by Danie on 07/11/2017.
+ */
+/**
+ * Created by Aluno on 02/10/2017.
+ */
+
+        import android.os.Bundle;
+        import android.support.v7.widget.CardView;
+        import android.support.v7.widget.RecyclerView;
+        import android.view.LayoutInflater;
+        import android.view.View;
+        import android.view.ViewGroup;
+        import android.widget.TextView;
+        import android.util.Log;
+        import android.content.Context;
+
+
+
+        import android.content.Intent;
+
+
+        import com.example.aluno.plantozen20.R;
+        import com.example.aluno.plantozen20.activity.TaskActivity;
+
+public class taskAdapter extends RecyclerView.Adapter<taskAdapter.MyViewHolder> {
     private String[] mDataset;
     private String[] mDataset2;
     private Intent intent = null;
@@ -48,14 +65,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public MyAdapter(String[] myDataset, String[] myDataset2) {
+    public taskAdapter(String[] myDataset, String[] myDataset2) {
         mDataset = myDataset;
         mDataset2 = myDataset2;
     }
 
     // Create new views (invoked by the layout manager)
     @Override
-    public MyAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent,
+    public taskAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent,
                                                      int viewType) {
 
 
@@ -77,13 +94,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             public void onClick(View view) {
 
                 String currentValue = mDataset[position];
-                intent =  new Intent(context, NoteActivity.class);
-                Bundle b = new Bundle();
+             //   intent =  new Intent(context, TaskActivity.class);
+              //  Bundle b = new Bundle();
 
-                b.putString("titulo", currentValue);
-               // b.putInt("key", 1); //Your id
-                intent.putExtras(b); //Put your id to your next Intent
-                context.startActivity(intent);
+                // b.putString("titulo", currentValue);
+                // b.putInt("key", 1); //Your id
+                //intent.putExtras(b); //Put your id to your next Intent
+                //context.startActivity(intent);
                 Log.d("CardView", "CardView Clicked: " + currentValue);
             }
         });

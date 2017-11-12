@@ -6,33 +6,48 @@
     android:padding="@dimen/modal_padding">
 
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/input_layout_nome2"
+        android:id="@+id/input_layout_nomenota"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/text_input_bottom_margin">
         <EditText
-            android:id="@+id/TarefaNome_EditText"
+            android:id="@+id/editText_nomenota"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:padding="10dp"
+            android:layout_marginRight="10dp"
+            android:clickable="false"
+            android:cursorVisible="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:background="@drawable/border_title"
+            android:gravity="center_horizontal"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:hint="Nome da atividade" />
+            android:inputType="textPersonName" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/input_layout_descricao2"
+        android:id="@+id/input_layout_nota"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/text_input_bottom_margin">
         <EditText
-            android:id="@+id/TarefaDescr_EditText"
+            android:id="@+id/editText3_nota"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:hint="Descrição da atividade" />
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+
+            android:padding="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/border"
+            android:inputType="textMultiLine"
+            android:gravity="top"
+            android:lines="20"
+            android:maxLines="20"/>
     </android.support.design.widget.TextInputLayout>
 
 </LinearLayout>

@@ -1,14 +1,17 @@
-package com.example.aluno.plantozen20;
+package com.example.aluno.plantozen20.model_classes;
 
 import com.orm.SugarRecord;
 
 public class Texto extends SugarRecord {
+    public enum Tipo {
+        TITULO, DESCRICAO
+    }
 
-    public TextoTipo tipo;
+    public Tipo tipo;
     public String conteudo;
 
     public Texto () {}
-    public Texto (TextoTipo tipo, String conteudo) {
+    public Texto (Tipo tipo, String conteudo) {
         this.tipo = tipo;
         this.conteudo = conteudo;
     }
