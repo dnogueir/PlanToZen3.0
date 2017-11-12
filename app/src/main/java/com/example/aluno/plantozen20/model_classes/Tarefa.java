@@ -4,10 +4,10 @@ import java.util.List;
 
 
 public class Tarefa extends Nota {
-    TarefaStatus status;
+    public enum TarefaStatus {PENDENTE, FINALZIADA, ESCONDIDA}
 
     public Tarefa() {
-        this.thisTipo = AnexoPaiTipo.TAREFA;
+        this.thisTipo = Anexo.PaiTipo.TAREFA;
     }
 
     public List<Anexo> getAnexos() {

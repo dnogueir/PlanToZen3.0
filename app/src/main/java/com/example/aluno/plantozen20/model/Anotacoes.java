@@ -10,10 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.aluno.plantozen20.model_classes.Anexo;
-import com.example.aluno.plantozen20.model_classes.AnexoTipo;
 import com.example.aluno.plantozen20.model_classes.Nota;
 import com.example.aluno.plantozen20.R;
-import com.example.aluno.plantozen20.model_classes.TextoTipo;
+import com.example.aluno.plantozen20.model_classes.Texto;
 import com.example.aluno.plantozen20.adapter.MyAdapter;
 import com.google.gson.Gson;
 
@@ -55,9 +54,9 @@ public class Anotacoes extends Fragment {
                 if (anexos != null) {
                     for (Anexo anexo: anexos) {
                         Log.i("Anexo:", gson.toJson(anexo));
-                        if (anexo.tipo == AnexoTipo.TEXTO && anexo.innTexto.tipo == TextoTipo.TITULO) {
+                        if (anexo.tipo == Anexo.Tipo.TEXTO && anexo.innTexto.tipo == Texto.Tipo.TITULO) {
                             titulo = anexo.innTexto.conteudo;
-                        } else if (anexo.tipo == AnexoTipo.TEXTO && anexo.innTexto.tipo == TextoTipo.DESCRICAO) {
+                        } else if (anexo.tipo == Anexo.Tipo.TEXTO && anexo.innTexto.tipo == Texto.Tipo.DESCRICAO) {
                             descr = anexo.innTexto.conteudo;
                         }
                     }

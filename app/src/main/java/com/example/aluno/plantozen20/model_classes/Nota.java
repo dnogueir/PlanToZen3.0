@@ -8,10 +8,10 @@ package com.example.aluno.plantozen20.model_classes;
 
 public class Nota extends SugarRecord {
 
-    public AnexoPaiTipo thisTipo;
+    public Anexo.PaiTipo thisTipo;
 
     public Nota() {
-        this.thisTipo = AnexoPaiTipo.NOTA;
+        this.thisTipo = Anexo.PaiTipo.NOTA;
     }
 
     public void addAnexo(Anexo anexo) {
@@ -28,8 +28,8 @@ public class Nota extends SugarRecord {
     public void addTituloDescr(String titulo_s, String descr_s) {
         Log.i("adicionando novo titulo e descr. Titulo: <" + titulo_s,
                 ">; Descr: <" + descr_s + ">");
-        Texto outNome = new Texto(TextoTipo.TITULO, titulo_s);
-        Texto outDescr = new Texto(TextoTipo.DESCRICAO, descr_s);
+        Texto outNome = new Texto(Texto.Tipo.TITULO, titulo_s);
+        Texto outDescr = new Texto(Texto.Tipo.DESCRICAO, descr_s);
         outNome.save();
         outDescr.save();
         this.addAnexo(new Anexo(outNome));
