@@ -113,9 +113,9 @@ public class MainActivity extends AppCompatActivity {
         // finaliza, reseta e reinicia o BD
          // descomente para resetar e popular o BD a cada inicialização
         Log.i("COMECOU A RESETAR O BD", "~~~~~~~~~~~~~~");
-        SugarContext.terminate();
+       // SugarContext.terminate();
         SchemaGenerator schemaGenerator = new SchemaGenerator(getApplicationContext());
-        schemaGenerator.deleteTables(new SugarDb(getApplicationContext()).getDB());
+        //schemaGenerator.deleteTables(new SugarDb(getApplicationContext()).getDB());
         SugarContext.init(getApplicationContext());
         schemaGenerator.createDatabase(new SugarDb(getApplicationContext()).getDB());
         Log.i("TERMINOU A RESETAR O BD", "~~~~~~~~~~~~~~");
@@ -146,9 +146,9 @@ public class MainActivity extends AppCompatActivity {
         nota = new Nota();
         nota.save();
         nota.addTituloDescr("Nota B", "Descr Nota B");
+
         //
         Log.i("TERMINOU A POPULAR O BD", "~~~~~~~~~~~~~~");
-
 
     }
 
