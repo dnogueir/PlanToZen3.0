@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/PlanToZen.iml" filepath="$PROJECT_DIR$/PlanToZen.iml" />
+      <module fileurl="file://C:\Users\Aluno\Desktop\ProjetoAndroid\PlanToZen3.0\PlanToZen.iml" filepath="C:\Users\Aluno\Desktop\ProjetoAndroid\PlanToZen3.0\PlanToZen.iml" />
       <module fileurl="file://$PROJECT_DIR$/PlanToZen3.0.iml" filepath="$PROJECT_DIR$/PlanToZen3.0.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>

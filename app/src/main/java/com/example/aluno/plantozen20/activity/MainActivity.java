@@ -115,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
         Log.i("COMECOU A RESETAR O BD", "~~~~~~~~~~~~~~");
        // SugarContext.terminate();
         SchemaGenerator schemaGenerator = new SchemaGenerator(getApplicationContext());
-        //schemaGenerator.deleteTables(new SugarDb(getApplicationContext()).getDB());
+      //  schemaGenerator.deleteTables(new SugarDb(getApplicationContext()).getDB());
         SugarContext.init(getApplicationContext());
         schemaGenerator.createDatabase(new SugarDb(getApplicationContext()).getDB());
         Log.i("TERMINOU A RESETAR O BD", "~~~~~~~~~~~~~~");
