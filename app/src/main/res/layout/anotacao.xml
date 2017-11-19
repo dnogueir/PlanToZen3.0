@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="@dimen/modal_padding">
+    android:padding="@dimen/modal_padding"
+    android:weightSum="1">
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/input_layout_nomenota"
@@ -32,8 +33,9 @@
     <android.support.design.widget.TextInputLayout
         android:id="@+id/input_layout_nota"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/text_input_bottom_margin">
+        android:layout_height="325dp"
+        android:layout_marginBottom="@dimen/text_input_bottom_margin"
+        android:layout_weight="0.24">
         <EditText
             android:id="@+id/editText3_nota"
             android:layout_width="match_parent"
@@ -49,5 +51,37 @@
             android:lines="20"
             android:maxLines="20"/>
     </android.support.design.widget.TextInputLayout>
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:columnCount="3"
+        >
+
+        <Button
+            android:id="@+id/buttonCancelar"
+            android:layout_column="0"
+            android:layout_row="1"
+            android:layout_gravity="fill"
+            android:layout_columnWeight="1"
+            android:text="Cancelar" />
+
+        <Button
+            android:id="@+id/buttonApagar"
+            android:layout_column="1"
+            android:layout_row="1"
+            android:layout_gravity="fill"
+            android:layout_columnWeight="1"
+            android:text="Apagar" />
+
+        <Button
+            android:id="@+id/buttonSalvar"
+            android:layout_column="2"
+            android:layout_row="1"
+            android:layout_gravity="fill"
+            android:layout_columnWeight="1"
+            android:text="Salvar" />
+
+    </GridLayout>
 
 </LinearLayout>
