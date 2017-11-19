@@ -25,6 +25,8 @@ import java.util.List;
  */
 public class Anotacoes extends Fragment {
 
+    public MyAdapter adapter;
+
     public Anotacoes() {
         // Required empty public constructor
     }
@@ -40,7 +42,6 @@ public class Anotacoes extends Fragment {
                              Bundle savedInstanceState) {
 
         // Pega as informações do BD, e acaba montando uma array de strings
-        Log.i("Antes de tudo!", "Antes de todo ~~~~~~~~~~");
         List<String> strings1 = new ArrayList<String>();
         List<String> strings2 = new ArrayList<String>();
         List<Nota> notas = Nota.listAll(Nota.class);
@@ -56,8 +57,9 @@ public class Anotacoes extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_blank, container, false);
 
         RecyclerView rv = (RecyclerView) rootView.findViewById(R.id.rv_recycler_view);
-        rv.setHasFixedSize(true);
-        MyAdapter adapter = new MyAdapter(strings1.toArray(new String[strings1.size()]), strings2.toArray(new String[strings2.size()]));
+        rv.setHasFixedSize(false);
+        adapter = new MyAdapter();
+        adapter.setData(strings1, strings2);
         //MyAdapter adapter = new MyAdapter(new String[]{"Anotacão 1", "Anotacão 2", "Anotacão 3", "Anotacão 4"},
         //        new String[]{"06/10/2017", "04/10/2017", "01/10/2017", "27/09/2017"});
         rv.setAdapter(adapter);

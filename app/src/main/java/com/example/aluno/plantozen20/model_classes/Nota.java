@@ -30,8 +30,6 @@ public class Nota extends SugarRecord {
     }
 
     public void addTituloDescr(String titulo_s, String descr_s) {
-        Log.i("adicionando novo titulo e descr. Titulo: <" + titulo_s,
-                ">; Descr: <" + descr_s + ">");
         Texto outNome = new Texto(Texto.Tipo.TITULO, titulo_s);
         Texto outDescr = new Texto(Texto.Tipo.DESCRICAO, descr_s);
         outNome.save();
@@ -72,7 +70,6 @@ public class Nota extends SugarRecord {
     }
     public boolean anyTagEq(List<Anexo> anexos, String tag) {
         for (Anexo anexo: anexos) {
-            Log.i("Anexo::", String.valueOf(new Gson().toJson(anexo)));
             if (anexo.tipo == Anexo.Tipo.TAG && anexo.innTag.nome.equals(tag)) {
                 return true;
             }

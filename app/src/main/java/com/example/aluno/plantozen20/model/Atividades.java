@@ -26,6 +26,8 @@ import java.util.List;
  */
 public class Atividades extends Fragment {
 
+    public taskAdapter adapter;
+
     public Atividades() {
         // Required empty public constructor
     }
@@ -41,7 +43,6 @@ public class Atividades extends Fragment {
                              Bundle savedInstanceState) {
 
         // Pega as informações do BD, e acaba montando uma array de strings
-        Log.i("Antes de tudo!", "Antes de todo ~~~~~~~~~~");
         List<String> titulos = new ArrayList<String>();
         List<String> descrs = new ArrayList<String>();
         List<Tarefa> tarefas = Tarefa.listAll(Tarefa.class);
@@ -58,7 +59,7 @@ public class Atividades extends Fragment {
 
         RecyclerView rv = (RecyclerView) rootView.findViewById(R.id.rv_recycler_view);
         rv.setHasFixedSize(true);
-        taskAdapter adapter = new taskAdapter(titulos.toArray(new String[titulos.size()]), descrs.toArray(new String[descrs.size()]));
+        adapter = new taskAdapter(titulos, descrs);
         rv.setAdapter(adapter);
 
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());

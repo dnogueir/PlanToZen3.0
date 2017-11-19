@@ -12,6 +12,7 @@ import android.widget.Switch;
 
 
 import com.example.aluno.plantozen20.R;
+import com.example.aluno.plantozen20.activity.MainActivity;
 import com.example.aluno.plantozen20.model_classes.Anexo;
 import com.example.aluno.plantozen20.model_classes.Tag;
 import com.example.aluno.plantozen20.model_classes.Tarefa;
@@ -21,6 +22,13 @@ import com.example.aluno.plantozen20.model_classes.Tarefa;
  */
 
 public class newActivity extends DialogFragment {
+
+    MainActivity rootRef;
+
+    public void rootRef(MainActivity rootRef) {
+        this.rootRef = rootRef;
+    }
+
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
@@ -48,6 +56,13 @@ public class newActivity extends DialogFragment {
                             Tag tmi = new Tag("TMI", "", 0);
                             tmi.save();
                             tarefa.addAnexo(new Anexo(tmi));
+                        }
+
+                        taskAdapter adapter = rootRef.aba_atividades.adapter;
+                        adapter.pushData(tarefaNome, tarefaDescr);
+                        if(switchChecked == true) {
+                            adapter = rootRef.aba_atividades_tmi.adapter;
+                            adapter.pushData(tarefaNome, tarefaDescr);
                         }
 
                     }

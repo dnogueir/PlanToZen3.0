@@ -41,6 +41,10 @@ import com.orm.SugarDb;
 
 public class MainActivity extends AppCompatActivity {
 
+    public Anotacoes aba_anotacoes;
+    public Atividades aba_atividades;
+    public AtividadesTMI aba_atividades_tmi;
+
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
      * fragments for each of the sections. We use a
@@ -74,31 +78,13 @@ public class MainActivity extends AppCompatActivity {
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
 
-        //Image Button nova anotação
+        //Image Button nova anotação e atividade
         ImageButton novaAnotacao = (ImageButton) findViewById(R.id.menu_item2);
-        novaAnotacao.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                newAnotation alertDialog = new newAnotation();
+        setOnClickAnotacao(novaAnotacao, this);
 
-                FragmentTransaction ft = getFragmentManager().beginTransaction();
-                ft.addToBackStack(null);
-
-                alertDialog.show(getSupportFragmentManager(),"Dialog");
-            }
-        });
-
-        //Image Button nova atividade
         ImageButton novaAtividade = (ImageButton) findViewById(R.id.menu_item);
-        novaAtividade.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                newActivity alertDialog = new newActivity();
+        setOnClickAtividade(novaAtividade, this);
 
-                FragmentTransaction ft = getFragmentManager().beginTransaction();
-                ft.addToBackStack(null);
-
-                alertDialog.show(getSupportFragmentManager(),"Dialog");
-            }
-        });
 
         // Iterate over all tabs and set the custom view
         for (int i = 0; i < tabLayout.getTabCount(); i++) {
@@ -106,20 +92,52 @@ public class MainActivity extends AppCompatActivity {
             tab.setCustomView(mSectionsPagerAdapter.getItem(i).getView());
         }
 
-
-
-        // TODO: deletar e popular o BD. acho que aqui é um lugar bom
-
         // finaliza, reseta e reinicia o BD
-         // descomente para resetar e popular o BD a cada inicialização
-        Log.i("COMECOU A RESETAR O BD", "~~~~~~~~~~~~~~");
-       // SugarContext.terminate();
+        resetBD();
+        // popula o BD
+        populaBD();
+    }
+
+    private void setOnClickAnotacao(ImageButton novaAnotacao, final MainActivity mainActivity){
+        novaAnotacao.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                newAnotation alertDialog = new newAnotation();
+                alertDialog.rootRef(mainActivity);
+
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.addToBackStack(null);
+
+                alertDialog.show(getSupportFragmentManager(),"Dialog");
+            }
+        });
+    }
+
+
+    private void setOnClickAtividade(ImageButton novaAtividade, final MainActivity mainActivity) {
+        novaAtividade.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                newActivity alertDialog = new newActivity();
+                alertDialog.rootRef(mainActivity);
+
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.addToBackStack(null);
+
+                alertDialog.show(getSupportFragmentManager(), "Dialog");
+            }
+        });
+    }
+
+    private void resetBD() {
+        Log.i("COMECOU A RESETAR O BD", "");
+        SugarContext.terminate();
         SchemaGenerator schemaGenerator = new SchemaGenerator(getApplicationContext());
-      //  schemaGenerator.deleteTables(new SugarDb(getApplicationContext()).getDB());
+        schemaGenerator.deleteTables(new SugarDb(getApplicationContext()).getDB());
         SugarContext.init(getApplicationContext());
         schemaGenerator.createDatabase(new SugarDb(getApplicationContext()).getDB());
-        Log.i("TERMINOU A RESETAR O BD", "~~~~~~~~~~~~~~");
-       // popula o BD
+        Log.i("TERMINOU A RESETAR O BD", "");
+    }
+
+    private void populaBD() {
         Log.i("COMECOU A POPULAR O BD", "~~~~~~~~~~~~~~");
         // cria a tag TMI
         Tag tmi = new Tag("TMI", "", 0);
@@ -149,7 +167,6 @@ public class MainActivity extends AppCompatActivity {
 
         //
         Log.i("TERMINOU A POPULAR O BD", "~~~~~~~~~~~~~~");
-
     }
 
     @Override
@@ -209,39 +226,8 @@ public class MainActivity extends AppCompatActivity {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-            TextView textView = (TextView) rootView.findViewById(R.id.section_label);
+            //TextView textView = (TextView) rootView.findViewById(R.id.section_label);
 
-
-/*
-            String str_do_textView = "aqui eu crio um novo texto na RAM <abc da RAM> e mostro;\n";
-            str_do_textView += " daí mudo pra <abc do BD> e salvo no BD; daí mudo o texto da RAM, daí carrego o PRIMEIRO do BD pra RAM e mostro.\n\n\n";
-            str_do_textView += getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)) + "\n\n\n";
-
-
-            Tag tg = new Tag("<abc da RAM>", "simbolo", 0x000000);
-
-            str_do_textView += tg.nome + "\n";
-
-            tg.nome = "<abc do BD>";
-
-            tg.save();
-            tg.nome = "<abc DESCARTADO>";
-            tg = Tag.findById(Tag.class, 1L); // 1L é 1 em long int 64 bits :|
-            str_do_textView += tg.nome + "\n\n\n\n";
-
-            str_do_textView += "agora eu vou carregar todos que tem no BD e mostrar na ordem:\n\n";
-            Iterator<Tag> tags = Tag.findAll(Tag.class);
-            while(tags.hasNext()) {
-                tg = tags.next();
-                str_do_textView += tg.nome + "\n";
-            }
-
-
-
-
-
-            textView.setText(str_do_textView);*/
-         //   textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
             return rootView;
         }
     }
@@ -272,11 +258,14 @@ public class MainActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    return new AtividadesTMI();
+                    aba_atividades_tmi = new AtividadesTMI();
+                    return aba_atividades_tmi;
                 case 1:
-                    return new Atividades();
+                    aba_atividades = new Atividades();
+                    return aba_atividades;
                 case 2:
-                    return new Anotacoes();
+                    aba_anotacoes = new Anotacoes();
+                    return aba_anotacoes;
             }
             return null;
         }

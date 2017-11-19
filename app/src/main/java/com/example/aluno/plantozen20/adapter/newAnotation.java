@@ -4,19 +4,31 @@ import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.content.DialogInterface;
 import android.widget.EditText;
 
 
+import com.example.aluno.plantozen20.activity.MainActivity;
 import com.example.aluno.plantozen20.model_classes.Nota;
 import com.example.aluno.plantozen20.R;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by tamir on 01/10/2017.
  */
 
 public class newAnotation extends DialogFragment {
+    MainActivity rootRef;
+
+    public void rootRef(MainActivity rootRef) {
+        this.rootRef = rootRef;
+    }
+
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
@@ -36,6 +48,9 @@ public class newAnotation extends DialogFragment {
                         Nota nota = new Nota();
                         nota.save();
                         nota.addTituloDescr(notaNome, notaDescr);
+
+                        MyAdapter adapter = rootRef.aba_anotacoes.adapter;
+                        adapter.pushData(notaNome, notaDescr);
                     }
                 })
                 .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {

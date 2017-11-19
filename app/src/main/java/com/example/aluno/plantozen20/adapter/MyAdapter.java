@@ -7,6 +7,7 @@ package com.example.aluno.plantozen20.adapter;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,9 +23,12 @@ import android.content.Intent;
 import com.example.aluno.plantozen20.R;
 import com.example.aluno.plantozen20.activity.NoteActivity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
-    private String[] mDataset;
-    private String[] mDataset2;
+    private List<String> mDataset;
+    private List<String> mDataset2;
     private Intent intent = null;
 
 
@@ -48,9 +52,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public MyAdapter(String[] myDataset, String[] myDataset2) {
-        mDataset = myDataset;
-        mDataset2 = myDataset2;
+    public MyAdapter() {
     }
 
     // Create new views (invoked by the layout manager)
@@ -69,14 +71,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
-        holder.mTextView.setText(mDataset[position]);
-        holder.mTextView2.setText(mDataset2[position]);
+        holder.mTextView.setText(mDataset.get(position));
+        holder.mTextView2.setText(mDataset2.get(position));
         final Context context = holder.context;
         holder.mCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                String currentValue = mDataset[position];
+                String currentValue = mDataset.get(position);
                 intent =  new Intent(context, NoteActivity.class);
                 Bundle b = new Bundle();
 
@@ -91,6 +93,25 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     @Override
     public int getItemCount() {
-        return mDataset.length;
+        return mDataset.size();
     }
+
+    public Pair<List<String>, List<String>> getData() {
+        return Pair.create(mDataset, mDataset2);
+    }
+
+    public void setData(List<String> myDataset, List<String> myDataset2) {
+        mDataset = myDataset;
+        mDataset2 = myDataset2;
+        notifyDataSetChanged();
+    }
+
+
+    public void pushData(String first, String second) {
+        mDataset.add(first);
+        mDataset2.add(second);
+        // TODO: use a specialized type of notify (for addition)
+        notifyDataSetChanged();
+    }
+
 }

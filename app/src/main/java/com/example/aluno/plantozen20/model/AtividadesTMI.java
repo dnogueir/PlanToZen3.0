@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.aluno.plantozen20.adapter.MyAdapter;
 import com.example.aluno.plantozen20.model_classes.Anexo;
 import com.example.aluno.plantozen20.R;
 import com.example.aluno.plantozen20.model_classes.Tag;
@@ -25,6 +26,8 @@ import java.util.List;
  * Created by Aluno on 02/10/2017.
  */
 public class AtividadesTMI extends Fragment {
+
+    public taskAdapter adapter;
 
     public AtividadesTMI() {
         // Required empty public constructor
@@ -42,14 +45,12 @@ public class AtividadesTMI extends Fragment {
 
 
         // Pega as informações do BD, e acaba montando uma array de strings
-        Log.i("Antes de tudo!", "Antes de todo ~~~~~~~~~~");
         List<String> titulos = new ArrayList<String>();
         List<String> descrs = new ArrayList<String>();
         List<Tarefa> tarefas = Tarefa.listAll(Tarefa.class);
         if (tarefas != null) {
             for (Tarefa tarefa: tarefas) {
                 Pair<List<Anexo>, Pair<String, String>> header = tarefa.getHeader();
-                Log.i("Outros anexos:", String.valueOf(new Gson().toJson(header.first)));
                 if (tarefa.anyTagEq(header.first, "TMI")) {
                     titulos.add(header.second.first);
                     descrs.add(header.second.second);
@@ -63,7 +64,7 @@ public class AtividadesTMI extends Fragment {
 
         RecyclerView rv = (RecyclerView) rootView.findViewById(R.id.rv_recycler_view);
         rv.setHasFixedSize(true);
-        taskAdapter adapter = new taskAdapter(titulos.toArray(new String[titulos.size()]), descrs.toArray(new String[descrs.size()]));
+        adapter = new taskAdapter(titulos, descrs);
         rv.setAdapter(adapter);
 
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
